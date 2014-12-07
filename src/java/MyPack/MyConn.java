@@ -10,11 +10,11 @@ import java.sql.SQLException;
     private static Connection con;
     
     public static String initConnection(){
-        String ur = "";
+        String url = "";
         if(con==null){
             try {
-                ur = "jdbc:mysql://localhost:3306/lifecare";
-                con = DriverManager.getConnection(ur, MYSQL_USERNAME, MYSQL_PASSWORD);
+                url = "jdbc:mysql://localhost:3306/lifecare";
+                con = DriverManager.getConnection(url, MYSQL_USERNAME, MYSQL_PASSWORD);
             } catch (SQLException e) {
                 e.printStackTrace();
                 return e.getMessage();
