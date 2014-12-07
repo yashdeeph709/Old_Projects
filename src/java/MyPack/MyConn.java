@@ -1,32 +1,16 @@
 package MyPack;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException; 
+import java.sql.*;
 
     public class MyConn {
-    public static final String MYSQL_USERNAME = "root";
-    public static final String MYSQL_PASSWORD = "";
     private static Connection con;
-    
-    public static String initConnection(){
-        String url = "";
-        if(con==null){
-            try {
-                url = "jdbc:mysql://localhost:3306/lifecare";
-                con = DriverManager.getConnection(url, MYSQL_USERNAME, MYSQL_PASSWORD);
-            } catch (SQLException e) {
-                e.printStackTrace();
-                return e.getMessage();
-            }
+    public static Connection getMySqlCon(){
+       try{
+        if(con==null||con.isClosed()){
+            Class.forName("com.mysql.jdbc.Driver");
+            con=DriverManager.getConnection("jdbc:mysql://localhost:3306/lifecare","root"," ");
         }
-        return "Connection Initialized!";
-    }
-
-    public static Connection getMySqlCon() {
-        if (con == null) {
-            initConnection();
-        }
+       }catch(Exception e){e.printStackTrace();}
         return con;
     }
 }
