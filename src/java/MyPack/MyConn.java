@@ -1,4 +1,4 @@
-package com;
+package MyPack;
 import java.sql.*;
   
 public class MyConn{
