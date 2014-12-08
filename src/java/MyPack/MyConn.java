@@ -1,16 +1,26 @@
 package MyPack;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
 
-import java.sql.*;
+public class MyConn{
+private static MyConn connector_ = null;
 
-    public class MyConn {
-    private static Connection con;
-    public static Connection getMySqlCon(){
-       try{
-        if(con==null||con.isClosed()){
-            Class.forName("com.mysql.jdbc.Driver");
-            con=DriverManager.getConnection("jdbc:mysql://localhost:3306/lifecare","root","");
-        }
-       }catch(Exception e){e.printStackTrace();}
-        return con;
-    }
+public static MyConn getInstance() throws Exception {
+if(connector_ == null) {
+connector_ = new MyConn();
+}
+return connector_;
+}
+
+public static Connection getConnection() throws Exception {
+Context ctx = new InitialContext();
+DataSource ds = (DataSource)ctx.lookup("java:comp/env/jdbc/lifecare");
+Connection c = ds.getConnection();
+return c;
+}
 }

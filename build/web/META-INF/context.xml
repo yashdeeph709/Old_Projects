@@ -1,2 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context antiJARLocking="true" path="/Lifecare"/>
+<Context>
+<!-- Specify a JDBC datasource -->
+<Resource name="jdbc/mydatabase"
+auth="Container"
+type="javax.sql.DataSource"
+username="demo"
+password="demo"
+driverClassName="com.mysql.jdbc.Driver"
+url="jdbc:mysql://www.coincan.net:3306/demo?autoReconnect=true"
+validationQuery="select 1"
+maxActive="2"
+maxIdle="1"/>
+</Context>
